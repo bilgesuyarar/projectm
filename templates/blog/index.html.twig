@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello!{% endblock %}
+
+{% block body %}
+
+    {{ form_start(searchBar) }}
+    {{ form_row(searchBar.search) }}
+    <button>Search</button>
+    {{ form_end(searchBar) }}
+
+
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('admin') }}">Admin</a>
+    {% endif %}
+
+    <a href="{{ path('add_blog') }}">Add new blog</a><br><br>
+
+    {% if is_granted(expression(
+        'not is_anonymous()'
+        )) %}
+        <a href="{{ path('edit_profile') }}">Profile</a>
+        <a href="{{ path('app_logout') }}">  Logout</a><br>
+    {% endif %}
+
+    {% if is_granted(expression(
+        'is_anonymous()'
+        )) %}
+
+        <a href="{{ path('app_login') }}">Login  </a>
+        <a href="{{ path('app_register') }}">  Register</a><br>
+    {% endif %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% if totalBlogs == 0 %}
+        <p>No blog found</p>
+    {% endif %}
+
+    {% for blog in blogs %}
+        <h3><a href="{{ path('blog_show', {'id':blog.id}) }}">{{ blog.title }}</a></h3>
+
+        <small>{{ blog.date|date("m-d-Y H:i:s")  }}</small>
+        <small>Posted by {{ blog.user.username }}</small>
+
+        <p>{{ blog.content }}</p>
+    {% endfor %}
+
+    {{ knp_pagination_render(blogs) }}
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin Blogs{% endblock %}
+{% block body %}
+<h4><a href="{{ path('blog_index') }}">Homepage</a></h4>
+<h2>POSTS</h2>
+
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Author</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Delete</th>
+            <th colspan="2">Change status</th>
+        </tr>
+        {% for blog in blogs %}
+        <tr>
+            <td><a href="{{ path('blog_show', {'id': blog.id}) }}">{{ blog.title }}</a></td>
+            <td>{{ blog.content }}</td>
+            <td>{{ blog.user.username }}</td>
+            <td>{{ blog.date|date("m-d-Y H:i:s")  }}</td>
+            <td>{{ blog.status }}</td>
+            <td><a href="{{ path('delete_blog', {'id': blog.id}) }} "onclick="return confirm('Are you sure you want to delete this blog?')">Delete</a></td>
+            <td><a href="{{ path('blog_status_active', {'id':blog.id}) }}">Active</a></td>
+            <td><a href="{{ path('blog_status_passive', {'id':blog.id}) }}">Passive</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

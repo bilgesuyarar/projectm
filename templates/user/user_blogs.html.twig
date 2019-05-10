@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}My posts{% endblock %}
+{% block body %}
+    <a href="{{ path('edit_profile') }}">My profile</a>
+    <a href="{{ path('blog_index') }}">Homepage</a>
+    {% for blog in blogs %}
+        <h3><a href="{{ path('blog_show', {'id':blog.id}) }}">{{ blog.title }}</a></h3>
+        <p>{{ blog.content }}</p>
+    {% endfor %}
+{% endblock %}

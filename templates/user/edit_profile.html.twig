@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <h4><a href="{{ path('blog_index') }}">Homepage</a></h4>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h2>Welcome to your profile {{ user.username }}</h2>
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <a href="{{ path('change_password') }}">Change password</a>
+    <a href="{{ path('user_blogs') }}">My posts</a>
+
+
+    {{ form_start(editProfileForm) }}
+        {{ form_row(editProfileForm.username) }}
+        {{ form_row(editProfileForm.email) }}
+    {{ form_end(editProfileForm) }}
+
+{% endblock %}
