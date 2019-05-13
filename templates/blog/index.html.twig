@@ -3,6 +3,8 @@
 {% block title %}Hello!{% endblock %}
 
 {% block body %}
+    <h2>Hello {{ app.user.username }}!</h2>
+
 
     {{ form_start(searchBar) }}
     {{ form_row(searchBar.search) }}
@@ -31,6 +33,7 @@
         <a href="{{ path('app_login') }}">Login  </a>
         <a href="{{ path('app_register') }}">  Register</a><br>
     {% endif %}
+
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">

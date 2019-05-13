@@ -88,11 +88,9 @@ class UserController extends AbstractController
      */
     public function userBlogs()
     {
-        $user = $this->getUser();
-        $blogs = $user->getBlogs();
-        return $this->render('user/user_blogs.html.twig', [
-                'blogs' => $blogs
-            ]);
+//        $user = $this->getUser();
+//        $blogs = $user->getBlogs();
+        return $this->render('user/user_blogs.html.twig');
     }
 
 
