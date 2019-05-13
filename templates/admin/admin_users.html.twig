@@ -3,5 +3,23 @@
 {% block body %}
 <h4><a href="{{ path('blog_index') }}">Homepage</a></h4>
 <h2>USERS</h2>
+<table border="1">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+    </tr>
+
+    {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{% for role in user.roles %}
+                    {{ role }}
+                {% endfor %}</td>
+        </tr>
+    {% endfor %}
+</table>
+
 
 {% endblock %}

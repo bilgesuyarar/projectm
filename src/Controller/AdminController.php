@@ -57,6 +57,7 @@ class AdminController extends AbstractController
     public function showUsers(Request $request, UserRepository $userRepository)
     {
         $users = $userRepository->findAll();
+
         return $this->render('admin/admin_users.html.twig',[
             'users' => $users
         ]);
@@ -79,6 +80,8 @@ class AdminController extends AbstractController
 
     }
 
+
+
     /**
      * @Route("/admin/blogs/make-active/{id}", name="blog_status_active")
      */
@@ -89,7 +92,6 @@ class AdminController extends AbstractController
         }
         $blog->setStatus('active');
         $em = $this->getDoctrine()->getEntityManager();
-//        $em->remove($blog);
         $em->flush();
 
         return $this->redirectToRoute('admin_blogs');
@@ -104,7 +106,6 @@ class AdminController extends AbstractController
         }
         $blog->setStatus('passive');
         $em = $this->getDoctrine()->getEntityManager();
-//        $em->remove($blog);
         $em->flush();
 
         return $this->redirectToRoute('admin_blogs');
